@@ -210,25 +210,19 @@ void CarregarRegistrosDoArquivo(Nolista** l){
     
     //O while vai rodar enquanto existirem linhas no arquivo
     while(fgets(linha, sizeof(linha), arquivo) != NULL){
-        //char especial para leitura failitada dos motivos
-        char motivoComAspas[105];
-        //Le os arquivos no formato esperado
         //O char motivoComAspas serve para que os motivos não sejam cortados na leitura
         //(int*)&temp.humor serve para que o sscanf leia o humor como int
-        if (sscanf(linha, "%d %10s %d \"%[^\"]\" %d", &temp.id, temp.data, (int*)&temp.humor, motivoComAspas, &temp.notaDoDia) == 5){
-            //strncpy serve para que o motivoComAspas passe suas informações para o temp.motivo
-            strncpy(temp.motivo, motivoComAspas, sizeof(temp.motivo));
+        if (sscanf(linha, "%d %10s %d \"%[^\"]\" %d", &temp.id, temp.data, &temp.humor, temp.motivo, &temp.notaDoDia) == 5){
             //Inseri o registro da linha em questão no lista
             InserirNoFim(l, temp);
-
             //Atualiza o contadorID
             extern int contadorID;
-            if(temp.id >= contadorID){
-                contadorID = temp.id + 1;
+            contadorID = temp.id + 1;
             }
         }
     }
 
     fclose(arquivo);
     printf("\nREGISTROS CARREGADOS COM SUCESSO!\n");
+
 }
