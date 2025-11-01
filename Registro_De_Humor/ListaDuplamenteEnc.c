@@ -88,27 +88,27 @@ void BuscarHumor(Nolista** l, int v){
 //Retorna a média de notas dos últimos X dias
 float MediaDasNotasUltimosX(Nolista** l, int x){
     int totalElementos = 0;
+    
     for (Nolista *p = *l; p != NULL; p = p->prox)
         totalElementos++;
-    if(x <= 0){
-        printf("\nQUANTIDADE INVALIDA, DEVE SER PELO MENOS 1\n");
-        return 0.0;
-    }
+    
     if(x > totalElementos) 
         x = totalElementos;
         
     Nolista *p = *l;
     int inicio = totalElementos - x;
+    
     for(int i = 0; i < inicio; i++)
         p = p->prox;
         
     float totalNotas = 0;
     int quantidade = 0;
+    
     for(; p != NULL; p = p->prox){
         totalNotas += p->info->notaDoDia;
         quantidade++;
     }
-    return quantidade ? totalNotas / quantidade : 0.0;
+    return totalNotas / quantidade;
 }
 
 //Retorna o humor mais frequente dos últimos X dias
@@ -203,5 +203,6 @@ void CarregarRegistrosDoArquivo(Nolista** l){
     fclose(arquivo);
     printf("\nREGISTROS CARREGADOS COM SUCESSO!\n");
 }
+
 
 
