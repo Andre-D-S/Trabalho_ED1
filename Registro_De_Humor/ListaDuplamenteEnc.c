@@ -86,7 +86,7 @@ void BuscarHumor(Nolista** l, int v){
 }
 
 //Retorna a média de notas dos últimos X dias
-float MediaDasNotasUltimosX(Nolista** l, int x) {
+float MediaDasNotasUltimosX(Nolista** l, int x){
     int totalElementos = 0;
     for (Nolista *p = *l; p != NULL; p = p->prox)
         totalElementos++;
@@ -112,7 +112,7 @@ float MediaDasNotasUltimosX(Nolista** l, int x) {
 }
 
 //Retorna o humor mais frequente dos últimos X dias
-Humor HumorMaisFrequenteUltimosX(Nolista** l, int x) {
+Humor HumorMaisFrequenteUltimosX(Nolista** l, int x){
     int totalElementos = 0;
     for(Nolista *p = *l; p != NULL; p = p->prox)
         totalElementos++;
@@ -160,11 +160,10 @@ void MostrarMotivosPorHumorX(Nolista** l, int humorDesejado){
 }
 
 //Salvar registros em arquivo
-void SalvarRegistrosEmArquivo(Nolista** l, const char* nomeArquivo){
+void SalvarRegistrosEmArquivo(Nolista** l, char* nomeArquivo){
     FILE *arquivo = fopen(nomeArquivo, "w");
     if(arquivo == NULL){
         printf("ERRO AO ABRIR O ARQUIVO PARA SALVAR OS REGISTROS!\n");
-        return;
     }
     
     for(Nolista *p = *l; p != NULL; p = p->prox){
@@ -185,7 +184,6 @@ void CarregarRegistrosDoArquivo(Nolista** l){
     FILE *arquivo = fopen("arquivo.txt", "r");
     if (arquivo == NULL) {
         printf("\nARQUIVO NAO ENCONTRADO!\n");
-        return;
     }
     
     RegistroDeHumor temp;
@@ -196,6 +194,7 @@ void CarregarRegistrosDoArquivo(Nolista** l){
             RegistroDeHumor *r = (RegistroDeHumor*)malloc(sizeof(RegistroDeHumor));
             *r = temp;
             InserirNoFim(l, r);
+            
             extern int contadorID;
             contadorID = temp.id + 1;
         }
@@ -204,3 +203,4 @@ void CarregarRegistrosDoArquivo(Nolista** l){
     fclose(arquivo);
     printf("\nREGISTROS CARREGADOS COM SUCESSO!\n");
 }
+
