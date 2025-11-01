@@ -24,9 +24,9 @@ RegistroDeHumor* criarRegistro();
 
 extern const char* Identificador[];
 
-void ImprimirRegistro(RegistroDeHumor r);
+void ImprimirRegistro(RegistroDeHumor *r);
 
-void LiberarRegistro(RegistroDeHumor r);
+void LiberarRegistro(RegistroDeHumor *r);
 
 #endif /* REGISTRODEHUMOR_H */
 

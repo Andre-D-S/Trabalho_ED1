@@ -2,7 +2,7 @@
 #define LISTADUPLAMENTEENC_H
 
 typedef struct nolista{
-    RegistroDeHumor info;
+    RegistroDeHumor *info;
     struct nolista *prox;
     struct nolista *ant;
 }Nolista;
@@ -11,7 +11,7 @@ void CriarLista(Nolista** l);
 
 int EstaVazia(Nolista** l);
 
-void InserirNoFim(Nolista** l, RegistroDeHumor registro);
+void InserirNoFim(Nolista** l, RegistroDeHumor *registro);
 
 void ImprimirTudo(Nolista** l);
 

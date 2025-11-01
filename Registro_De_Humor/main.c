@@ -31,7 +31,7 @@ int main() {
         switch(opcao) {
             case 1: //Adicionar novo registro
                 RegistroDeHumor *novoRegistro = criarRegistro();
-                InserirNoFim(&lista, *novoRegistro);
+                InserirNoFim(&lista, novoRegistro);
                 printf("\nREGISTRO ADICIONADO COM SUCESSO!\n");
                 break;
 

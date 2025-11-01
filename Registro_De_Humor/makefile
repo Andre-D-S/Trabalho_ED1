@@ -1,18 +1,17 @@
-
-# Variaveis
+# Variáveis
 CC = gcc
 CFLAGS = -Wall -g
 OBJ = main.o RegistroDeHumor.o ListaDuplamenteEnc.o
-EXEC = programa.exe
+EXEC = programa
 
 # Regra padrão (compilar e executar)
 all: $(EXEC)
-	cmd /c $(EXEC)
+	./$(EXEC)
 	$(MAKE) clean
 
-# Regra para compilar o programa principal
+# Regra para compilar o executável
 $(EXEC): $(OBJ)
-	$(CC) $(CFLAGS) -o programa.exe $(OBJ)
+	$(CC) $(CFLAGS) -o $(EXEC) $(OBJ)
 
 # Compilar main.c
 main.o: main.c RegistroDeHumor.h ListaDuplamenteEnc.h
@@ -28,4 +27,4 @@ ListaDuplamenteEnc.o: ListaDuplamenteEnc.c ListaDuplamenteEnc.h RegistroDeHumor.
 
 # Limpeza dos arquivos objeto e executável
 clean:
-	cmd /c "del /Q *.o $(EXEC)"
+	rm -f *.o $(EXEC)
