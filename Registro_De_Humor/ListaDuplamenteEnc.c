@@ -23,10 +23,10 @@ int EstaVazia(Nolista** l){
 //Insere um registro no fim da lista
 void InserirNoFim(Nolista** l, RegistroDeHumor *registro){
     Nolista* novo = (Nolista*)malloc(sizeof(Nolista));
-    if (novo != NULL){
+    if(novo != NULL){
         novo->info = registro;
         novo->prox = NULL;
-        if (EstaVazia(l)){ 
+        if(EstaVazia(l)){ 
             novo->ant = NULL;
             *l = novo;
         } 
@@ -89,7 +89,7 @@ void BuscarHumor(Nolista** l, int v){
 float MediaDasNotasUltimosX(Nolista** l, int x){
     int totalElementos = 0;
     
-    for (Nolista *p = *l; p != NULL; p = p->prox)
+    for(Nolista *p = *l; p != NULL; p = p->prox)
         totalElementos++;
     
     if(x > totalElementos) 
@@ -130,7 +130,7 @@ Humor HumorMaisFrequenteUltimosX(Nolista** l, int x){
         
     int maxIndex = 0;
     for(int i = 1; i < 7; i++){
-        if (contagem[i] > contagem[maxIndex])
+        if(contagem[i] > contagem[maxIndex])
             maxIndex = i;
     }
     return (Humor)maxIndex;
@@ -182,7 +182,7 @@ void SalvarRegistrosEmArquivo(Nolista** l, char* nomeArquivo){
 //Carregar registros do arquivo
 void CarregarRegistrosDoArquivo(Nolista** l){
     FILE *arquivo = fopen("arquivo.txt", "r");
-    if (arquivo == NULL) {
+    if(arquivo == NULL){
         printf("\nARQUIVO NAO ENCONTRADO!\n");
     }
     
@@ -190,7 +190,7 @@ void CarregarRegistrosDoArquivo(Nolista** l){
     char linha[200];
     
     while(fgets(linha, sizeof(linha), arquivo) != NULL){
-        if (sscanf(linha, "%d %10s %d \"%[^\"]\" %d", &temp.id, temp.data, (int*)&temp.humor, temp.motivo, &temp.notaDoDia) == 5){
+        if(sscanf(linha, "%d %10s %d \"%[^\"]\" %d", &temp.id, temp.data, (int*)&temp.humor, temp.motivo, &temp.notaDoDia) == 5){
             RegistroDeHumor *r = (RegistroDeHumor*)malloc(sizeof(RegistroDeHumor));
             *r = temp;
             InserirNoFim(l, r);
@@ -203,6 +203,7 @@ void CarregarRegistrosDoArquivo(Nolista** l){
     fclose(arquivo);
     printf("\nREGISTROS CARREGADOS COM SUCESSO!\n");
 }
+
 
 
 
