@@ -179,30 +179,43 @@ void SalvarRegistrosEmArquivo(Nolista** l, char* nomeArquivo){
     printf("\nREGISTROS SALVOS EM ARQUIVO COM SUCESSO!\n");
 }
 
-//Carregar registros do arquivo
+//Carregar os registros salvos no arquivo
 void CarregarRegistrosDoArquivo(Nolista** l){
     FILE *arquivo = fopen("arquivo.txt", "r");
-    if (arquivo == NULL) {
+    if(arquivo == NULL){
         printf("\nARQUIVO NAO ENCONTRADO!\n");
-    }
-    
-    RegistroDeHumor temp;
-    char linha[200];
-    
-    while(fgets(linha, sizeof(linha), arquivo) != NULL){
-        if (sscanf(linha, "%d %10s %d \"%[^\"]\" %d", &temp.id, temp.data, (int*)&temp.humor, temp.motivo, &temp.notaDoDia) == 5){
-            RegistroDeHumor *r = (RegistroDeHumor*)malloc(sizeof(RegistroDeHumor));
-            *r = temp;
-            InserirNoFim(l, r);
-            
-            extern int contadorID;
-            contadorID = temp.id + 1;
-        }
+        return;
     }
 
+    char linha[200];
+
+    while(fgets(linha, sizeof(linha), arquivo) != NULL){
+        //Aloca memória para um novo registro
+        RegistroDeHumor *r = (RegistroDeHumor*)malloc(sizeof(RegistroDeHumor));
+        if(r == NULL){
+            printf("\nERRO AO ALOCAR MEMORIA!\n");
+            fclose(arquivo);
+            return;
+        }
+
+        //Lê os campos
+        if(sscanf(linha, "%d %10s %d \"%[^\"]\" %d",
+                   &r->id, r->data, (int*)&r->humor, r->motivo, &r->notaDoDia) == 5){
+
+            InserirNoFim(l, r);
+
+            extern int contadorID;
+            contadorID = r->id + 1;
+        } 
+        else{
+            //Caso a linha não tenha o formato esperado, libera e ignora
+            free(r);
+        }
+    }
     fclose(arquivo);
     printf("\nREGISTROS CARREGADOS COM SUCESSO!\n");
 }
+
 
 
 
