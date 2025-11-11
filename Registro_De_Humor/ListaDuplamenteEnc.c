@@ -184,26 +184,9 @@ void CarregarRegistrosDoArquivo(Nolista** l){
     FILE *arquivo = fopen("arquivo.txt", "r");
     if(arquivo == NULL){
         printf("\nARQUIVO NAO ENCONTRADO!\n");
-<<<<<<< HEAD
         return;
-=======
     }
     
-    RegistroDeHumor temp;
-    char linha[200];
-    
-    while(fgets(linha, sizeof(linha), arquivo) != NULL){
-        if(sscanf(linha, "%d %10s %d \"%[^\"]\" %d", &temp.id, temp.data, (int*)&temp.humor, temp.motivo, &temp.notaDoDia) == 5){
-            RegistroDeHumor *r = (RegistroDeHumor*)malloc(sizeof(RegistroDeHumor));
-            *r = temp;
-            InserirNoFim(l, r);
-            
-            extern int contadorID;
-            contadorID = temp.id + 1;
-        }
->>>>>>> 3fa9046032eb0561d561f10663ddd8e2b872a66e
-    }
-
     char linha[200];
 
     while(fgets(linha, sizeof(linha), arquivo) != NULL){
